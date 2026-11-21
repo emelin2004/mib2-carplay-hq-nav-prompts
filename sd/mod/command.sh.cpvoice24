@@ -1,0 +1,12 @@
+#!/bin/sh
+# CPVOICE24 one-time setup hook for the M.I.B. launcher.
+# Rename to mod/command.sh on the M.I.B. SD card (keep your MIB2-Patcher command.sh
+# as command.sh.patcher), then GEM > M.I.B. > Advanced Settings > Individual Script.
+# It only copies CPVOICE24 to the unit and adds its GEM screen; it installs nothing.
+VOLUME=${VOLUME:-/net/mmx/fs/sda0}
+if [ -f "$VOLUME/CPVOICE24/cpvoice24.sh" ]; then
+	/bin/sh "$VOLUME/CPVOICE24/cpvoice24.sh" setup < /dev/null
+else
+	echo "$VOLUME/CPVOICE24 not found, copy the CPVOICE24 folder to the SD card root"
+fi
+sleep 10

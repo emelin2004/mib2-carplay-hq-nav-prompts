@@ -1,0 +1,25 @@
+#---------------------------------------------------------------------
+# CPVOICE24 - CarPlay navigation prompts at 24 or 48 kHz instead of 16 kHz (K3663)
+# Linked into /eso/hmi/engdefs by "cpvoice24.sh setup"; runs from /mnt/app/eso/cpvoice24
+#---------------------------------------------------------------------
+screen   CPVOICE24 Main
+
+script
+   value    sys 1 0x0100 "/net/mmx/mnt/app/eso/cpvoice24/esd/status.sh"
+   label    "Status"
+
+script
+   value    sys 1 0x0100 "/net/mmx/mnt/app/eso/cpvoice24/esd/install24.sh"
+   label    "Install 24 kHz nav prompts (reboot after)"
+
+script
+   value    sys 1 0x0100 "/net/mmx/mnt/app/eso/cpvoice24/esd/install48.sh"
+   label    "Install 48 kHz nav prompts (reboot after)"
+
+script
+   value    sys 1 0x0100 "/net/mmx/mnt/app/eso/cpvoice24/esd/uninstall.sh"
+   label    "Uninstall (stock libairplay.so, reboot after)"
+
+script
+   value    sys 1 0x0100 "/net/mmx/mnt/app/eso/cpvoice24/esd/gem-off.sh"
+   label    "Remove this GEM screen"
