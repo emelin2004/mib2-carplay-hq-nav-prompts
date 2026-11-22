@@ -10,6 +10,23 @@ It installs and uninstalls from the green menu (GEM) with [M.I.B.](https://githu
 | Bytes changed in `libairplay.so` | – | 2 | 3 |
 | Car-tested | – | ✅ A6 C7.5 Avant, iPhone | ✅ A6 C7.5 Avant, iPhone (sounds close to music) |
 
+## Verified
+
+Confirmed by the maintainer on their own Audi A6 C7.5 Avant (K3663) with an iPhone, 48 kHz build, via SSH `sloginfo`:
+
+```
+[AudioStream] <AirPlay> Supported output formats: 0X8010
+[AudioStream] <AirPlay> Supported output formats: 0X4000
+[AudioStream] <AirPlay> Audio Format: (48000[kHz] | 16[bits] | channels: 2)
+[AudioStream] [AudioStreamPrepare] Stream type: 100 ... Ch = 2 | SR = 48000 | BPS = 16
+[AudioStream] <AirPlay> Audio Format: (48000[kHz] | 16[bits] | channels: 1)
+[AudioStream] [AudioStreamPrepare] Stream type: 101 ... Ch = 1 | SR = 48000 | BPS = 16
+```
+
+The unit offers `0x4000` for the nav-prompt stream (101), and the iPhone picks 48 kHz mono. The main stream (100: music, Siri) is unchanged at `0x8010` / 48 kHz stereo. On stock firmware, stream 101 is offered `0x10` and runs at 16 kHz.
+
+To check your own unit, play a nav prompt and then run `sloginfo | grep -i "format"` over SSH.
+
 ## Supported firmware
 
 **Only `MHI2_ER_AU57x_K3663_1` (MU1425)**, for example the Audi A6/A7 C7.5. The installer works only on the exact stock `libairplay.so` of that firmware (SHA1 `fa413305f4aebfe94c80cf454647d2042a507a45`, 694088 bytes). On any other file it stops and changes nothing.
